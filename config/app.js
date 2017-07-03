@@ -9,7 +9,7 @@ let config = {
     store: require('../bin/sessionStore')
   },
   mongodb: {
-    connUrl: 'mongodb://localhost:27017/blog'
+    connUrl: 'mongodb://localhost:27017/js'
   },
   qiniu: { // 测试key,用一次换一个的,换成自己的key
     ACCESS_KEY: 'BIA57A1Pdt0W7rsEx1fBrBt5PEcUzU9s0aiYjICz',

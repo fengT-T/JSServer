@@ -2,7 +2,7 @@ const Koa = require('koa')
 const app = new Koa()
 // const views = require('koa-views')
 const json = require('koa-json')
-const onerror = require('koa-onerror')
+const errorHandle = require('./bin/errorHandle')
 const koaBody = require('koa-body')
 const session = require('koa-session')
 const logger = require('koa-logger')
@@ -12,7 +12,8 @@ const path = require('path')
 const conf = require('./config/app')
 
 // error handler
-onerror(app)
+app.use(errorHandle)
+// onerror(app)
 
 // middlewares
 app.use(koaBody())
@@ -41,7 +42,7 @@ glob.sync('./models/*.js').forEach(function (file) {
   models[path.basename(file, '.js')] = require(file)
 })
 app.use(async (ctx, next) => {
-  ctx.model = models
+  ctx.models = models
   await next()
 })
 // mongoose promise替换
