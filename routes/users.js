@@ -16,6 +16,7 @@ router.post('/login', async function (ctx, next) {
   })
   _user.password = undefined
   ctx.session.user = _user
+  ctx.body = _user
   ctx.status = 200
 })
 
