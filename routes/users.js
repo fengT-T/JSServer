@@ -6,7 +6,6 @@ router.post('/login', async function (ctx, next) {
   let { User } = ctx.models
   let { body } = ctx.request
   let _user = await User.findUsersByName(body.name)
-  
   ctx.assert(_user.length > 0, 503, {
     responseData: ['name', '用户名错误', 'auth'], isShow: true
   })
@@ -17,6 +16,7 @@ router.post('/login', async function (ctx, next) {
   })
   _user.password = undefined
   ctx.session.user = _user
+  ctx.body = _user
   ctx.status = 200
 })
 
