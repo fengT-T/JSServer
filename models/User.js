@@ -40,7 +40,11 @@ let userSchema = new Schema({
     // 对用户订单的引用
     type: Schema.Types.ObjectId,
     ref: 'order'
-  }]
+  }],
+  isAdmin: {
+    type: Boolean,
+    default: false
+  }
 })
 
 /**
