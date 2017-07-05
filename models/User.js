@@ -19,7 +19,8 @@ let userSchema = new Schema({
     required: true
   },
   address: {
-    type: String
+    type: String,
+    default: ''
   },
   headImgUrl: {
     type: String,
@@ -30,7 +31,8 @@ let userSchema = new Schema({
     default: '这个网站你问我恣辞不恣辞，我当然是恣辞的'
   },
   telephoneNum: {
-    type: String
+    type: String,
+    default: ''
   },
   money: {
     type: Number,
@@ -44,6 +46,10 @@ let userSchema = new Schema({
   isAdmin: {
     type: Boolean,
     default: false
+  },
+  buyNum: {
+    type: Number,
+    default: 0
   }
 })
 

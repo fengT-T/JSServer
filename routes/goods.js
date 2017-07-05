@@ -19,7 +19,7 @@ router.get('/list', async function (ctx, next) {
 router.get('/info', async function (ctx, next) {
   let { Goods } = ctx.models
   let { id } = ctx.query
-  let goods = await Goods.findById(id)
+  let goods = await Goods.findById(id).exec()
   ctx.body = goods
 })
 

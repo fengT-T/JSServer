@@ -26,6 +26,10 @@ let goodsSchema = new Schema({
     type: String,
     reqiure: true
   },
+  salesNum: {
+    type: Number,
+    default: 0
+  },
   disable: {
     type: Boolean,
     default: false
