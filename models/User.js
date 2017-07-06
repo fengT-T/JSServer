@@ -41,7 +41,7 @@ let userSchema = new Schema({
   order: [{
     // 对用户订单的引用
     type: Schema.Types.ObjectId,
-    ref: 'order'
+    ref: 'orders'
   }],
   isAdmin: {
     type: Boolean,

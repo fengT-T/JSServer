@@ -21,6 +21,11 @@ let orderSchema = new Schema({
     type: Number,
     default: 0
   },
+  cost: {
+    // 总价值
+    type: Number,
+    required: true
+  },
   express: {
     // 快递
     type: String,
