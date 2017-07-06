@@ -20,7 +20,7 @@ let userSchema = new Schema({
   },
   address: {
     type: String,
-    default: ''
+    default: '湘漂大学'
   },
   headImgUrl: {
     type: String,

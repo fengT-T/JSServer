@@ -42,4 +42,15 @@ router.post('/modify', async function (ctx, next) {
   ctx.body = newUser
 })
 
+router.get('/confirm', async function (ctx, next) {
+  let { Order } = ctx.models
+  let { orderId } = ctx.request.query
+  let { user } = ctx.session
+  ctx.assert(user.order.includes(orderId), 422)
+  await Order.findByIdAndUpdate(orderId, {
+    status: 2
+  })
+  ctx.status = 200
+})
+
 module.exports = router

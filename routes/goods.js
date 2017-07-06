@@ -23,4 +23,16 @@ router.get('/info', async function (ctx, next) {
   ctx.body = goods
 })
 
+router.post('/modify', async function (ctx, next) {
+  let { Goods } = ctx.models
+  let { user } = ctx.session
+  let body = ctx.request.body
+  ctx.assert(user.isAdmin, 401)
+  let goods = await Goods.findByIdAndUpdate(body.id, body, {
+    new: true, // 很坑的一个东西，返回新的，不然默认返回旧的
+    runValidators: true// 一定要验证不然完全gg
+  }).exec()
+  ctx.body = goods
+})
+
 module.exports = router
