@@ -17,7 +17,8 @@ router.get('/list', async function (ctx, next) {
   let list = await Goods.find({
     _id: {
       [operation]: startId
-    }
+    },
+    disable: false
   }).limit(12)
     .sort({ '_id': -1 })
     .exec()

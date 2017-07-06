@@ -3,8 +3,15 @@ const router = require('koa-router')()
 router.prefix('/admin')
 
 router.use('/', async (ctx, next) => {
-  ctx.assert(ctx.session.user.isAdmin, 401)
+  ctx.assert(ctx.session.user && ctx.session.user.isAdmin, 401)
   await next()
+})
+
+router.post('/createGoods', async function (ctx, next) {
+  let { Goods } = ctx.models
+  let body = ctx.request.body
+  let goods = await new Goods(body).save()
+  ctx.body = goods
 })
 
 router.post('/modifyGoods', async function (ctx, next) {

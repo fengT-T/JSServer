@@ -30,6 +30,9 @@ let goodsSchema = new Schema({
     type: Number,
     default: 0
   },
+  detailPicList: [{
+    type: String
+  }],
   disable: {
     type: Boolean,
     default: false
