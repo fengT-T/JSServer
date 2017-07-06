@@ -36,7 +36,7 @@ let userSchema = new Schema({
   },
   money: {
     type: Number,
-    default: 0
+    default: 5000
   },
   order: [{
     // 对用户订单的引用
