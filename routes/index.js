@@ -19,7 +19,7 @@ router.get('/info', async (ctx, next) => {
   let userCount = userList.length
   let userRank = userList.slice(0, 5)
 
-  let goodList = (await Goods.find().sort({buyNum: -1}).limit(5).exec())
+  let goodList = (await Goods.find().sort({salesNum: -1}).limit(5).exec())
   ctx.body = {orderCount, orderSum, userCount, goodList, userRank}
 })
 
