@@ -8,7 +8,7 @@ router.get('/', async (ctx, next) => {
 })
 
 router.get('/info', async (ctx, next) => {
-  let { Order, User } = ctx.models
+  let { Order, User, Goods } = ctx.models
   let orderList = (await Order.find().exec())
   let orderCount = orderList.length
   let orderSum = orderList.reduce((a, b) => {
@@ -19,7 +19,8 @@ router.get('/info', async (ctx, next) => {
   let userCount = userList.length
   let userRank = userList.slice(0, 5)
 
-  ctx.body = {orderCount, orderSum, userCount, userRank}
+  let goodList = (await Goods.find().sort({buyNum: -1}).limit(5).exec())
+  ctx.body = {orderCount, orderSum, userCount, goodList, userRank}
 })
 
 module.exports = router
