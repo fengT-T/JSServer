@@ -10,6 +10,7 @@ const mongoose = require('mongoose')
 const glob = require('glob')
 const path = require('path')
 const conf = require('./config/app')
+const orderIo = require('./socket.io/order')
 
 // error handler
 app.use(errorHandle)
@@ -20,13 +21,7 @@ app.use(koaBody())
 app.use(session(conf.session, app))
 app.use(json())
 app.use(logger())
-
-// 纯粹的api服务器
-// app.use(require('koa-static')(__dirname + '/public'))
-
-// app.use(views(__dirname + '/views', {
-//   extension: 'pug'
-// }))
+orderIo.attach(app)
 
 // logger
 app.use(async (ctx, next) => {
@@ -57,4 +52,5 @@ glob.sync('./routes/*.js').forEach(function (file) {
   let route = require(file)
   app.use(route.routes(), route.allowedMethods())
 })
-module.exports = app
+
+app.listen(process.env.PORT || 3000)
