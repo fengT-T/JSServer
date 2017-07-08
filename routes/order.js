@@ -24,7 +24,7 @@ router.post('/create', async function (ctx, next) {
   await User.findByIdAndUpdate(user._id, user).exec()
 
   await Goods.findByIdAndUpdate(goods._id, {
-    salesNum: goods.salesNum + 1
+    salesNum: goods.salesNum + body.num
   }).exec()
 
   ctx.body = order

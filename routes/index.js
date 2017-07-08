@@ -1,18 +1,25 @@
 const router = require('koa-router')()
 
+router.prefix('/index')
+
 router.get('/', async (ctx, next) => {
   let a = 12
   ctx.body = a
 })
 
-router.get('/string', async (ctx, next) => {
-  ctx.body = 'koa2 string'
-})
+router.get('/info', async (ctx, next) => {
+  let { Order, User } = ctx.models
+  let orderList = (await Order.find().exec())
+  let orderCount = orderList.length
+  let orderSum = orderList.reduce((a, b) => {
+    return a + b.cost
+  }, 0)
 
-router.get('/json', async (ctx, next) => {
-  ctx.body = {
-    title: 'koa2 json'
-  }
+  let userList = (await User.find({isAdmin: false}).sort({'buyNum': 1}).exec())
+  let userCount = userList.length
+  let userRank = userList.slice(0, 5)
+
+  ctx.body = {orderCount, orderSum, userCount, userRank}
 })
 
 module.exports = router

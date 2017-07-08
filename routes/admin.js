@@ -26,7 +26,7 @@ router.post('/modifyGoods', async function (ctx, next) {
 
 router.get('/orderList', async function (ctx, next) {
   let { Order } = ctx.models
-  let orderList = await Order.find().populate('goods').exec()
+  let orderList = await Order.find().populate('goods').sort({ '_id': -1 }).exec()
   ctx.body = orderList
 })
 
