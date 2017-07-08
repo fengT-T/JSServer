@@ -15,7 +15,7 @@ router.get('/info', async (ctx, next) => {
     return a + b.cost
   }, 0)
 
-  let userList = (await User.find({isAdmin: false}).sort({'buyNum': 1}).exec())
+  let userList = (await User.find({isAdmin: false}).sort({'buyNum': -1}).exec())
   let userCount = userList.length
   let userRank = userList.slice(0, 5)
 
