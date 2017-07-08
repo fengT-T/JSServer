@@ -19,8 +19,8 @@ router.get('/list', async function (ctx, next) {
       [operation]: startId
     },
     disable: false
-  }).limit(12)
-    .sort({'salesNum': -1})
+  }).sort({'_id': -1})
+    .limit(12)
     .exec()
   ctx.body = list
 })
