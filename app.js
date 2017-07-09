@@ -10,8 +10,16 @@ const mongoose = require('mongoose')
 const glob = require('glob')
 const path = require('path')
 const conf = require('./config/app')
-const orderIo = require('./socket.io/order')
+const http = require('http')
+const server = http.createServer(app.callback())
+const io = require('socket.io')(server)
+require('./socket.io/io')(io)
 
+// io
+app.use(async function (ctx, next) {
+  ctx.io = io
+  await next()
+})
 // error handler
 app.use(errorHandle)
 // onerror(app)
@@ -21,7 +29,6 @@ app.use(koaBody())
 app.use(session(conf.session, app))
 app.use(json())
 app.use(logger())
-orderIo.attach(app)
 
 // logger
 app.use(async (ctx, next) => {
@@ -53,4 +60,4 @@ glob.sync('./routes/*.js').forEach(function (file) {
   app.use(route.routes(), route.allowedMethods())
 })
 
-app.listen(process.env.PORT || 3000)
+server.listen(3000)
