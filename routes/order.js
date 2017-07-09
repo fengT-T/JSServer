@@ -23,9 +23,12 @@ router.post('/create', async function (ctx, next) {
   user.buyNum = user.buyNum + cost
   await User.findByIdAndUpdate(user._id, user).exec()
 
-  await Goods.findByIdAndUpdate(goods._id, {
+  goods = await Goods.findByIdAndUpdate(goods._id, {
     salesNum: goods.salesNum + body.num
   }).exec()
+
+  order.goods = goods
+  ctx.io.of('/').to('admin').emit('orderCreate', order)
 
   ctx.body = order
 })
