@@ -9,8 +9,11 @@ const DELETE_FIELD = function (field, obj) {
 router.prefix('/userPrivate')
 
 router.use('/', async (ctx, next) => {
-  ctx.assert(ctx.session.user, 401)
-  await next()
+  if (ctx.session.user) {
+    await next()
+  } else {
+    ctx.status = 401
+  }
 })
 
 router.get('/info', async function (ctx, next) {
