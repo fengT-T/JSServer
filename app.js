@@ -1,6 +1,6 @@
 const Koa = require('koa')
 const app = new Koa()
-// const views = require('koa-views')
+const staticSource = require('koa-static')
 const json = require('koa-json')
 const errorHandle = require('./bin/errorHandle')
 const koaBody = require('koa-body')
@@ -14,6 +14,8 @@ const http = require('http')
 const server = http.createServer(app.callback())
 const io = require('socket.io')(server)
 require('./socket.io/io')(io)
+
+app.use(staticSource('public'))
 
 // io
 app.use(async function (ctx, next) {
