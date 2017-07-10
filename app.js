@@ -62,4 +62,4 @@ glob.sync('./routes/*.js').forEach(function (file) {
   app.use(route.routes(), route.allowedMethods())
 })
 
-server.listen(3000)
+server.listen(80)
