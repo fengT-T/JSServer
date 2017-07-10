@@ -14,7 +14,7 @@ let config = {
   qiniu: { // 测试key,用一次换一个的,换成自己的key
     ACCESS_KEY: 'BIA57A1Pdt0W7rsEx1fBrBt5PEcUzU9s0aiYjICz',
     SECRET_KEY: 'DWXQwP0Czh-tfbNlNHC-klCvCkDzrGUn85rFNxS2',
-    bucketUrl: 'http://orblzfbb0.bkt.clouddn.com',
+    bucketUrl: 'http://osidtmaiq.bkt.clouddn.com',
     uploadUrl: 'http://upload-z2.qiniu.com'
   }
 }

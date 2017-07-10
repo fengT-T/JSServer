@@ -1,5 +1,7 @@
 const router = require('koa-router')()
 const DANGER_FIELD = ['isAdmin', 'buyNum', 'order']
+const qiniu = require('qiniu')
+const conf = require('../config/app')
 
 const DELETE_FIELD = function (field, obj) {
   field.forEach(function (ele) {
@@ -29,6 +31,16 @@ router.get('/orderList', async function (ctx, next) {
       populate: { path: 'goods' }
     })
     .exec()).order
+})
+
+router.get('/uploadToken', function (ctx, next) {
+  qiniu.conf.ACCESS_KEY = conf.qiniu.ACCESS_KEY
+  qiniu.conf.SECRET_KEY = conf.qiniu.SECRET_KEY
+  ctx.body = {
+    token: new qiniu.rs.PutPolicy({
+      scope: 'jsjs'
+    }).uploadToken()
+  }
 })
 
 router.post('/modify', async function (ctx, next) {
