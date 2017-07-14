@@ -15,6 +15,7 @@ let store = {
     return JSON.parse(data)
   },
   async set (key, sess, maxAge) {
+    (maxAge === 'session') && (maxAge = 86400000)
     let res
     try {
       res = await redis.set(`KOASESSION:${key}`, JSON.stringify(sess), 'PX', maxAge)
